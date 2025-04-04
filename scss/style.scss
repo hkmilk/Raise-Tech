@@ -1,0 +1,675 @@
+//variables
+$color--white: #FFFFFF;
+$color--black: #121212;
+$color--blue: #2498B3;
+$color--lightBlue: 	#D4F1F8;
+$color--lightBlue2: 	#E9F8FB;
+
+// @use "../../foundation/mixin";
+@use "sass:math";
+
+// hamburger
+$btnWidth: 23px;
+$btnHeight: 2px;
+
+
+// mixin
+@mixin breakpoint($point) {   
+    @if $point==pc {
+        @media (min-width: 1281px){
+            @content ;
+        }
+    }
+
+    @if $point==large {
+        @media (min-width: 1201px) and (max-width: 1280px){
+            @content ;
+        }
+    }
+
+
+    @if $point==tablet {
+        @media  (max-width: 1200px){
+            @content ;
+        }
+    }
+
+    @if $point==medium {
+        @media (min-width: 768px) and  (max-width: 1078px){
+            @content ;
+        }
+    }
+
+    @if $point==sp {
+        @media (max-width: 767px){
+            @content ;
+        } 
+    }
+}
+
+ html {
+    font-size: 62.5%; 
+ }
+
+ body {
+    width: 100%;
+    margin: 0;
+    background: $color--white;
+    font-size: 1.6rem;
+    font-family: 'Noto Sans JP',  MyYuGothicM, YuGothic, -apple-system, BlinkMacSystemFont, "Hiragino kaku Gothic ProN", Meiryo, Verdana, arial, helvetica, sans-serif;
+    font-weight: 700;
+    color: $color--black;
+    line-height: 1.7;
+    overflow-x: hidden;
+ }
+
+img{
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+ }
+
+ h1, h2, h3, h4, h5, h6, p, figure {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+ } 
+
+ ul,ol {
+    list-style-type: none;
+ }
+
+ a {
+    color: inherit;
+    text-decoration: none;
+ }
+//  PC
+ @media screen and (min-width: 1201px){
+
+ .l-header {
+    height: 70px;
+    background: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-attachment: fixed;
+    width: 100%;
+    position: fixed;
+    z-index: 7000;
+
+
+    .l-header__logo {
+         display: flex;
+         align-items: center;
+         height: 33px;
+         padding: 18.5px 2.73px 18.5px 0 ; 
+         line-height: 1.3;
+        }
+    }          
+           .h1-logo img {
+            margin: 0 0 0 21px;
+            height: 33px;
+
+
+             
+             @include breakpoint(large){
+                 width: auto;
+                 height: 33px;
+     
+             } 
+
+
+        }
+
+
+    
+    .l-header__logo span {
+        margin-left: 16px;
+        font-size: 1.4rem;
+        font-weight: 900;
+        @include breakpoint(large) {
+            opacity: 0;
+        }
+
+    strong{
+        font-size: 1.8rem;
+        font-weight: bolder;
+       }           
+    }
+
+ #nav{
+    display: flex;
+    font-size: 1.6rem;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    white-space: nowrap;
+ }
+ #nav > li {
+    padding: 0px 15px;
+    display: flex;
+    align-items: center;
+    height: 70px;
+    font-size: 1.6rem;
+    position: relative;
+            
+           @include breakpoint(tablet){
+                   display: none;
+           }
+}
+.menu-item-has-children{
+    display: none;
+}
+
+#nav > li > a {
+    width: 100%;
+}
+#nav > li:hover {
+    background-color: #D4F1F8;
+    align-items: center;
+}
+#nav > li > ul{
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 70px;
+    flex-direction: column;
+}
+.children{
+    background-color: #E9F8FB;
+    display: flex;
+    height: 60px;
+    align-items: center;
+}
+.children > a{
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    padding: 15px 60px 15px 15px;
+    white-space: nowrap;
+    font-weight: normal;
+    text-align: left;
+}
+.children:hover{
+    background-color: #FFFFFF;
+    color: #2498B3;
+}
+.btn-contact {
+    color: $color--white;
+    background: $color--blue;
+    padding: 22.41px 16px 24px 15px;
+
+    @include breakpoint(tablet) {
+            display: none;      
+    }
+
+}
+.p-hamburger {
+    @media screen and (min-width: 1200px){
+        display: none;
+    }
+}
+
+}
+
+// tablet
+@media screen and (max-width: 1200px)  {
+    
+.p-hamburger{
+    width: 50px;
+    height: 50px;
+    background-color: #FFFFFF;
+    position: relative;
+   
+    @include breakpoint(pc){
+        display: none;
+    }
+    @include breakpoint(large){
+        display: none;
+    }
+
+// 三本線のスタイリング
+
+&::before,
+&::after{
+    content: "";
+    width: $btnWidth;
+    height: $btnHeight;
+    background-color: #2498B3;
+    position: absolute;
+    left: calc(50% - math.div( #{$btnWidth},2) );
+    display: block;
+    transition: transform 0.2s;
+}
+
+&::before{
+    top: 15px;
+}
+&::after{
+    bottom: 15px;
+}
+ > span {
+        width: $btnWidth;
+        height: $btnHeight;
+        font-size: 0;
+        background-color: #2498B3;
+        background-size: auto $btnHeight;
+        position: absolute;
+        left: calc(50% - math.div( #{$btnWidth},2 ) );
+        top: 50%;
+        transform: translateY(-50%);
+        transition: transform 0.2s;
+}
+&.is-open{
+    background-color: #2498B3;
+
+    &::before{
+        transform: rotate(45deg);
+        top: 23px;
+        background-color: #FFFFFF;
+}
+    &::after{
+        transform: rotate(-45deg);
+        top: 23px;
+        background-color: #FFFFFF;
+    }
+> span {
+    background: none;
+    }
+  }
+}  
+
+body.is-open{
+    position: fixed;
+}
+.l-header {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    position: relative;
+
+
+       .h1-logo img {
+        margin: 10px;
+        width: auto;
+        height: 30px;
+       }
+       .l-header__logo span {
+
+        @include breakpoint(tablet) {
+            display: none;
+        }
+       }
+
+    #nav{
+        width: 100vw;
+        height: auto;
+        position: absolute;
+        top: 50px;
+        background-color: #FFFFFF;
+        display: none;
+        overflow-y: auto;
+        z-index: 7000;
+        @include breakpoint( pc ){
+            width: inherit;
+            height: inherit;
+            padding: inherit;
+            position: static;
+            background: inherit;
+            flex-direction: row;
+            transition: inherit;
+        }
+        >ol {
+            display: none;
+        }
+
+        #nav > li {
+            @include breakpoint(pc){
+                margin-bottom: 0;
+            }
+        }
+        .menu-item-wrapper{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+        }
+        .menu-item-wrapper > a {
+            color: #131D34;
+            padding-left: 10px;
+        }
+
+#nav > ul {
+    width: 100vw;
+    margin: 0;
+    background-color: #FFFFFF;
+        }
+   }
+
+#nav > li{
+        >ul{
+            display: none;
+        }
+        // 十字のスタイリング
+        .menu-item-has-children{
+            width: 50px;
+            height: 50px;
+            background-color: #FFFFFF;
+            position: relative;
+           
+          &::before,
+          &::after{
+                 content: "";
+                 width: $btnWidth;
+                 height: $btnHeight;
+                 background-color: 	#131D34;
+                 position: absolute;
+                 left: calc(50% - math.div( #{$btnWidth},2) );
+                 transition: transform 0.2s;
+}
+            &::before{
+                     top: 25px;
+            }
+            &::after{
+                bottom: 24px;
+                transform: rotate(90deg);
+            }
+}
+        &.is-open{
+            >ul{
+                display: block;
+            }
+                .menu-item-has-children{
+                background-color: #F7F7F7;
+                &::after{
+                    opacity: 0;
+                }
+            }
+            .children{
+                color: #121212;
+                font-weight: normal;
+                padding: 10px 10px 10px 25px;
+            }
+            .children:hover{
+                background-color: #F3FAFB;
+            }
+            .children > a{
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+            }
+    }
+}
+   .menu-item-wrapper:hover{
+    background-color: 	#F3FAFB;
+    }
+
+    #nav {
+    @include breakpoint( pc ) {
+        font-size: 1.6rem;
+        margin: 0;
+        padding: 0;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+    }
+    li {
+        @include breakpoint( pc ){
+            padding: 0px 15px;
+            display: flex;
+            align-items: center;
+            height: 70px;
+            font-size: 1.6rem;
+            position: relative;
+        }
+        a{
+            @include breakpoint( pc ){
+                font-weight: normal;
+                white-space: nowrap;
+            }
+        }
+    }
+}
+}
+}
+
+
+@media screen and (min-width: 768px)  {
+.main{
+    background-color: #FFFFFF;
+}
+
+.bg-all{
+    position: relative;
+    width: 100%;
+    height: 650px;
+    display: grid;
+    place-content: center;
+    place-items: center;
+    top: 70px;
+    overflow: hidden;
+        
+         @include breakpoint(tablet){
+             top: 0px;
+         }
+}
+
+.absolute06{
+        position: absolute;
+        overflow: hidden;
+        background-size: cover;
+        z-index: 50;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        background-attachment: fixed;
+        background-image: url(../img/bg-hero3.png);
+      }
+.absolute05{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: none;
+        z-index: 100;
+    }
+.absolute04{
+        position: absolute;
+        z-index: 150;
+        background-position: center;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        object-fit: none;
+      }
+ .absolute01{
+        background: $color--white;
+        text-align: center;
+        width: 412.77px; 
+        height: 327.91px;
+        border-radius: 10px;
+        z-index: 5000;
+        position: absolute;
+        top: 80px;
+    }
+    .h2-logo{
+        position: absolute;
+        top: 43px;
+        left: 66.37px;
+    }
+    .contents-p {
+        position: absolute;
+        top: 123.55px;
+        left: 40px;
+    }
+    .btn-contact2{
+        position: absolute;
+        top: 232.91px;
+        left: 61.39px;
+        display: inline-block;
+        font-size: 1.8rem;
+        display: inline-block;
+        padding: 24px 37px;
+        background-color: #2498B3;
+        border-color: #2498B3;
+        color: #FFFFFF;
+        border-radius: 4px;
+        line-height: 1;
+    }
+    .Sec--black{
+        background-color: #000000;
+        padding: 4em 0;
+    }
+
+  .container_1 {
+    position: relative;
+    display: flex;
+    z-index: 6000;
+    grid-template-columns:repeat(3, 230px);
+    justify-content: center;
+    align-items: center;
+    margin-top: -199px;
+    width: 100%;
+
+             @include breakpoint(tablet){
+                 top: -65px;
+             }
+  }
+  .absolute02 {
+    text-align: center;
+    color:$color--white;
+    width: 230px;
+    margin: 0 50px;      
+          @include breakpoint(medium){
+              width: 29.33%;
+              margin: 0 2%;    
+          }
+  }
+  
+   .container_1  p{
+    color:  $color--white;
+    text-align: left;
+    font-size: 1.6rem;
+ }
+    .Recommendation__title{
+     margin: 5px 9px 0 0;
+    font-weight: 700;
+    font-size: 24px;
+    text-align: center;
+   }
+}
+
+// SP
+@media screen and (max-width: 767px){
+    .bg-all{
+        overflow: hidden;
+        width: 100%;
+        height: 300px;
+        padding-bottom: 320px;
+        background-position: center -25px;
+        position:relative;
+        display: flex;
+        text-align: center;
+    
+
+.absolute06{
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        background-size: cover;
+        z-index: 50;
+        height: 300px;
+        background-image: url(../img/bg-hero3.png);
+      }
+.absolute05{
+        top: -20px;
+        width: 100%;
+        position: absolute;
+        z-index: 100;
+        height: 300px;
+        object-fit: cover;
+        background-position: center -30px;
+    }
+.absolute04{
+        top: -25px;
+        width: 100%;
+        position: absolute;
+        z-index: 150;
+        left: 0px;
+        height: 300px;
+        object-fit: cover;
+        background-position: center -30px;
+      }
+      .absolute01{
+        height: 156.28px;
+        width: 100%; 
+        z-index: 5000;
+        position: absolute;
+        padding: 9px 0 13px;
+        display: inline-block;
+        text-align: center;
+        top: 160.50px;
+        background-color: #FFFFFF;
+    
+    .h2-logo{
+          display: none;
+          margin-bottom: 0.5rem;
+    }
+    .contents-p {
+        display: block;
+        background-color: #FFFFFF;
+        font-size: 1.3rem;
+        width: 100%;
+        max-width: 100%;
+        left: 0;
+        margin: 0.5em 0;
+    }
+
+    .btn-contact2{
+        margin: 0.5em 0;
+        align-items: center;
+        padding:12px 18px ;
+        display: inline-block;
+        background-color: #2498B3;
+        border-radius: 4px;
+        line-height: 1;
+        color: #FFFFFF;
+        text-align: center;
+    }
+    .btn-contact2{
+        transition: 0.5s;
+    }
+   }
+  }
+  .Sec--black{
+    background-color: #000000;
+}
+  .container_1 {
+    padding: 4em 0;
+    display: flex;
+    z-index: 6000;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    flex-direction: column;
+  }
+  .absolute02 {
+    text-align: center;
+    color:$color--white;
+    width:auto;
+    margin: 0 2%; 
+    margin-bottom: 2.5em;   
+  }
+  
+   .container_1  p{
+    margin: 0.5em 0 0 0;
+    color:  $color--white;
+    text-align: left;
+    font-size: 1.6rem;
+ }
+    .Recommendation__title{
+     margin: 5px 9px 0 0;
+    font-weight: 700;
+    font-size: 24px;
+    text-align: center;
+   }
+}
